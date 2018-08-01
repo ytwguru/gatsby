@@ -40,7 +40,7 @@ async function fetch({
   if (_verbose)
     console.log(
       colorized.out(
-        `=START PLUGIN=====================================`,
+        `=STARTING PLUGIN=====================================`,
         colorized.color.Font.FgBlue
       )
     )
@@ -87,9 +87,18 @@ async function fetch({
       url: url,
     }
     if (_auth) {
-      options.auth = {
-        username: _auth.htaccess_user,
-        password: _auth.htaccess_pass,
+      switch(getAuthenticationType(_auth)){
+        case `htaccess`:
+          options.auth = {
+            username: _auth.htaccess_user,
+            password: _auth.htaccess_pass,
+          }
+          break
+        case `jwt`:
+          axios.defaults.headers.common.Authorization = ``
+          if(_auth.jwt_token){
+            axios.defaults.headers.common.Authorization = `Bearer ${_auth.jwt_token}`
+          }
       }
     }
     allRoutes = await axios(options)
@@ -309,14 +318,20 @@ async function getPages(
           page: page,
         })}`,
       }
-      if (_hostingWPCOM) {
-        o.headers = {
-          Authorization: `Bearer ${_accessToken}`,
-        }
-      } else {
-        o.auth = _auth
-          ? { username: _auth.htaccess_user, password: _auth.htaccess_pass }
-          : null
+
+      switch(getAuthenticationType(_auth)){
+        case `wpcom`:
+          if (_hostingWPCOM) {
+            o.headers = {
+              Authorization: `Bearer ${_accessToken}`,
+            }
+          }
+          break
+        case `htaccess`:
+          o.auth = _auth ? { username: _auth.htaccess_user, password: _auth.htaccess_pass } : null
+          break
+        default :
+          _auth = {}
       }
       return o
     }
@@ -513,6 +528,25 @@ function getValidRoutes({
   }
 
   return validRoutes
+}
+
+/**
+ * Get the authentication type by using the type property. If the type is not set (for backwards compatibility)
+ * infer the type by using the auth properties
+ *
+ * @param _auth
+ * @returns {*|string}
+ */
+const getAuthenticationType = _auth => {
+  let { type } = _auth || {}
+  if(!type){
+    return (_auth.htaccess_user && _auth.htaccess_pass ) && `htaccess`
+      || (_auth.jwt_token) && `jwt`
+      || (_auth.wpcom_app_clientSecret && _auth.wpcom_app_clientId) && `wpcom`
+      || ``
+  }
+
+  return type
 }
 
 /**

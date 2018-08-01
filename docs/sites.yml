@@ -1831,5 +1831,73 @@
   url: https://mattbag.github.io
   categories: 
     - Landing
-    - Portoflio
+    - Portfolio
+  featured: false
+- title: Lifestone Church
+  main_url: 'https://www.lifestonechurch.net/'
+  url: 'https://www.lifestonechurch.net/'
+  source_url: 'https://github.com/lifestonechurch/lifestonechurch.net'
+  featured: false
+  categories:
+    - Marketing
+    - Nonprofit
+- title: Artem Sapegin
+  description: > 
+     Little homepage of Artem Sapegin, a frontend developer, passionate photographer, coffee drinker and crazy dogs’ owner.
+  main_url: https://sapegin.me/
+  url: https://sapegin.me/
+  categories:
+    - Landing
+    - Portfolio
+    - Open Source
+    - Personal
+    - Web Dev
+  built_by: Artem Sapegin
+  built_by_url: https://github.com/sapegin
+  featured: false
+- title: SparkPost Developers
+  main_url: 'https://developers.sparkpost.com/'
+  url: 'https://developers.sparkpost.com/'
+  source_url: 'https://github.com/SparkPost/developers.sparkpost.com'
+  categories:
+    - Documentation
+    - API
+  featured: false
+- title: Malik Browne Portfolio 2018
+  description: >
+    The portfolio blog of Malik Browne, a full stack engineer, foodie, and avid blogger/YouTuber.
+  main_url: https://www.malikbrowne.com/about
+  url: https://www.malikbrowne.com
+  categories:
+    - Blog
+    - Portfolio
+  built_by: Malik Browne
+  built_by_url: https://twitter.com/milkstarz
+  featured: false
+- title: Novatics
+  description: > 
+     Digital products that inspire and make a difference
+  main_url: https://www.novatics.com.br
+  url: https://www.novatics.com.br
+  categories:
+    - Landing
+    - Portfolio
+    - Technology
+    - Digital Products
+    - Web Dev
+  built_by: Novatics
+  built_by_url: https://github.com/Novatics
+  featured: false
+- title: I migliori by Vivigratis
+  description: > 
+     Product review website
+  main_url: https://imigliori.vivigratis.com/
+  url: https://imigliori.vivigratis.com/
+  categories:
+    - Blog
+    - Travel
+    - Technology
+    - Wellness
+    - Fashion
+  built_by: Kframe Interactive SA
   featured: false
